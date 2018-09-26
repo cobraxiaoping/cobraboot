@@ -1,2 +1,2 @@
 # cobraboot
-springboot project1
+springboot project
