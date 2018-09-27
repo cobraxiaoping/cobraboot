@@ -89,7 +89,6 @@ public class QuartzJob implements Serializable {
 		this.methodName = methodName;
 	}
 
-	// getter, setter
 
 	@Override
 	public String toString() {
