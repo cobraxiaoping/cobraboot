@@ -15,22 +15,23 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 
-import com.cobra.boot.entity.Class;
+import com.cobra.boot.entity.QuartzJob;
+import com.cobra.boot.entity.QuartzJob_;
 
 
-public interface ClassRepository extends JpaRepository<Class, Integer>, JpaSpecificationExecutor<Class> {
+public interface QuartzJobRepository extends JpaRepository<QuartzJob, Integer>, JpaSpecificationExecutor<QuartzJob> {
 
 	public static class Executor {
-		private ClassRepository repository;
+		private QuartzJobRepository repository;
 
-		public Executor(ClassRepository repository) {
+		public Executor(QuartzJobRepository repository) {
 			this.repository = repository;
 		}
-		public Page<Class> findAll(final Class filter, Pageable pageable) {
-			return repository.findAll(new Specification<Class>() {
+		public Page<QuartzJob> findAll(final QuartzJob filter, Pageable pageable) {
+			return repository.findAll(new Specification<QuartzJob>() {
 				private static final long serialVersionUID = 1L;
 				@Override
-				public Predicate toPredicate(Root<Class> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
+				public Predicate toPredicate(Root<QuartzJob> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
 					if (filter == null) {
 						return cb.conjunction();
 					}
@@ -40,15 +41,16 @@ public interface ClassRepository extends JpaRepository<Class, Integer>, JpaSpeci
 			}, pageable);
 		}
 		
-		public List<Class> findAll(final Class filter) {
-			return repository.findAll(new Specification<Class>() {
+		public List<QuartzJob> findAll(final QuartzJob filter) {
+			return repository.findAll(new Specification<QuartzJob>() {
 				private static final long serialVersionUID = 1L;
 				@Override
-				public Predicate toPredicate(Root<Class> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
+				public Predicate toPredicate(Root<QuartzJob> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
 					if (filter == null) {
 						return cb.conjunction();
 					}
 					return cb.and(merge(
+							eq(cb, root.get(QuartzJob_.jobStatus), filter.getJobStatus())
 					));
 				}
 			});
