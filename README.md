@@ -1,3 +1,4 @@
 # cobraboot
 springboot project
-springboot+quartz整合
+1、springboot+jpa
+2、springboot+quartz整合
