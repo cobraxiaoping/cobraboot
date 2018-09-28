@@ -1,7 +1,6 @@
 package com.cobra.boot.entity;
 
 import java.io.Serializable;
-import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -9,10 +8,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.TableGenerator;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-@Entity(name="sys_quartz_job")
-@JsonIgnoreProperties(value = { "hibernateLazyInitializer", "handler", "fieldHandler" })
+@Entity(name = "sys_quartz_job")
 public class QuartzJob implements Serializable {
 
 	private static final long serialVersionUID = 607415834012939242L;
@@ -27,7 +24,7 @@ public class QuartzJob implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.TABLE, generator = "seq")
 	@TableGenerator(name = "seq", allocationSize = 1, table = "sys_id_generator", pkColumnName = "table_name", valueColumnName = "table_id")
-	private long jobId;
+	private Integer jobId;
 
 	/** 任务名称 */
 	private String jobName;
@@ -57,13 +54,13 @@ public class QuartzJob implements Serializable {
 	private String methodName;
 
 	/** 启动时间 */
-	private Date startTime;
+	private String startTime;
 
 	/** 前一次运行时间 */
-	private Date previousTime;
+	private String previousTime;
 
 	/** 下次运行时间 */
-	private Date nextTime;
+	private String nextTime;
 
 	public QuartzJob() {
 		super();
@@ -88,7 +85,6 @@ public class QuartzJob implements Serializable {
 		this.jobClass = jobClass;
 		this.methodName = methodName;
 	}
-
 
 	@Override
 	public String toString() {
@@ -120,11 +116,11 @@ public class QuartzJob implements Serializable {
 		return false;
 	}
 
-	public long getJobId() {
+	public Integer getJobId() {
 		return jobId;
 	}
 
-	public void setJobId(long jobId) {
+	public void setJobId(Integer jobId) {
 		this.jobId = jobId;
 	}
 
@@ -200,27 +196,27 @@ public class QuartzJob implements Serializable {
 		this.methodName = methodName;
 	}
 
-	public Date getStartTime() {
+	public String getStartTime() {
 		return startTime;
 	}
 
-	public void setStartTime(Date startTime) {
+	public void setStartTime(String startTime) {
 		this.startTime = startTime;
 	}
 
-	public Date getPreviousTime() {
+	public String getPreviousTime() {
 		return previousTime;
 	}
 
-	public void setPreviousTime(Date previousTime) {
+	public void setPreviousTime(String previousTime) {
 		this.previousTime = previousTime;
 	}
 
-	public Date getNextTime() {
+	public String getNextTime() {
 		return nextTime;
 	}
 
-	public void setNextTime(Date nextTime) {
+	public void setNextTime(String nextTime) {
 		this.nextTime = nextTime;
 	}
 }

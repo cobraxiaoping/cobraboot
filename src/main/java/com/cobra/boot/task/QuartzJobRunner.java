@@ -13,10 +13,14 @@ import org.springframework.stereotype.Component;
 import com.cobra.boot.entity.QuartzJob;
 import com.cobra.boot.services.QuartzJobService;
 
-/**
- * @author cobra
- * 项目启动执行定时任务的调度
- */
+
+/**  
+ * @ClassName: QuartzJobRunner  
+ * @Description: 项目启动执行定时任务的调度  
+ * @author: cobra  
+ * @date: 2018年9月28日  
+ * @version: v1.0
+ */  
 @Component
 public class QuartzJobRunner implements ApplicationRunner {
 
@@ -34,9 +38,9 @@ public class QuartzJobRunner implements ApplicationRunner {
 		
 		log.info("**********初始化加载定时任务开始**********");
 		List<QuartzJob> jobList = quartzJobService.findQuartzJobByStatus(QuartzJob.STATUS_RUNNING);
-		jobList.forEach((job)->{
+		jobList.forEach((quartzJob)->{
 			try {
-				quartzJobManager.addJob(job.getJobName(), job.getJobGroup(), job.getJobName(), job.getJobGroup(), job.getJobClass(), job.getCronExpression());
+				quartzJobManager.addJob(quartzJob);
 			} catch (SchedulerException e) {
 				e.printStackTrace();
 				log.info("**********初始化加载定时任务异常**********");
